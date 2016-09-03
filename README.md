@@ -12,8 +12,8 @@ Normally you should connect websdr to portA. Others passive IQ stream consumers 
 ![Diagram](./doc/rtlmuxer_diagram.png)
 
 run example  
-_./tcp_split --src-address=192.168.1.200 --src-port=1234 --sink-bind-address=192.168.1.200 --sink-bind-port-a=2222 --sink-bind-port-b=2223_  
-_./tcp_split --help_  
+_./rtlmuxer --src-address=192.168.1.200 --src-port=1234 --sink-bind-address=192.168.1.200 --sink-bind-port-a=2222 --sink-bind-port-b=2223_  
+_./rtlmuxer --help_  
 
 How to compile - just run `make`.  
 Tested on linux only.
