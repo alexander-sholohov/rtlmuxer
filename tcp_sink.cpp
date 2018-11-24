@@ -72,13 +72,24 @@ void CTcpSink::doWrite()
     int written = ::send(m_socket, &tmpBuf[0], len, MSG_NOSIGNAL);
     if( written < 0 )
     {
+        bool overload = ( errno == EWOULDBLOCK || errno == EAGAIN ); // On Linux this is the same codes
+
         if( !m_errorPrinted )
         {
-            printf("Sink socket (%d) got error: %d", m_socket, errno);fflush(stdout);
+            if( overload )
+            {
+                // Not an error. The socket is still busy sending the previous data.
+                printf("o");fflush(stdout);
+            }
+            else
+            {
+                printf("Sink socket (%d) got error: %d ", m_socket, errno);fflush(stdout);
+            }
+
             m_errorPrinted = true;
         }
 
-        if( errno != EWOULDBLOCK )
+        if( !overload )
         {
             // some error happen
             m_needDelete = true;
