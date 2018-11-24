@@ -198,7 +198,7 @@ int main(int argc, char** argv)
         unsigned numTriesConnect = 1;
         while( !src.isConnected() )
         {
-            printf("Try to connect %s (%d)\n", src.printableAddress().c_str(), numTriesConnect );fflush(stdout);
+            printf("Try to connect to %s (%d)\n", src.printableAddress().c_str(), numTriesConnect );fflush(stdout);
             src.connectSync();
             if( src.isConnected() )
             {
