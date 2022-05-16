@@ -260,7 +260,13 @@ int main(int argc, char** argv)
             printf("after acceptB %d\n", client);fflush(stdout);
             prepareAcceptedSocket(client);
             sinkList.addSink(client, OUT_BUFFER_SIZE, false);
-            // we do not send identifier to port B
+            if( src.isIdentifierPresent() )
+            {
+                printf("identifier sent\n");fflush(stdout);
+                std::vector<char> identifier;
+                src.fillIdentifier( identifier );
+                sinkList.getLastSink().putData( identifier );
+            }
         }
 
         if( FD_ISSET(src.getSocket(), &wr_set) )
